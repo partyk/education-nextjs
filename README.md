@@ -108,3 +108,81 @@ export async function getStaticProps(context) {
 
 ---
 Pokud chceš některou z těchto vlastností rozvést, dej vědět!
+
+# SPA vs. Fullstack Framework (React vs. Next.js)
+
+## 1. Co je SPA (Single Page Application)?
+- **SPA** je webová aplikace, která se načte jako jedna HTML stránka a následné navigace probíhají bez opětovného načtení stránky.
+- Typickým příkladem je aplikace napsaná v čistém **Reactu** (např. vytvořená pomocí [Create React App](https://create-react-app.dev/)).
+
+### Výhody SPA (React):
+- **Rychlá uživatelská zkušenost:** Navigace mezi stránkami je okamžitá, protože se stránka nepřenačítá.
+- **Jednodušší frontendová architektura:** Vše běží v prohlížeči, backend je často pouze API.
+- **Dobrá pro komplexní interaktivní aplikace** (např. dashboardy).
+
+### Nevýhody SPA:
+- **SEO:** Vyhledávače nemusí dobře indexovat obsah, protože většina obsahu je generovaná až v prohlížeči.
+- **Dlouhá doba prvního načtení:** Celá aplikace se musí stáhnout do prohlížeče hned na začátku.
+- **Hůře řešitelná autentizace a ochrana citlivých dat.**
+
+---
+
+## 2. Co je Fullstack framework (např. Next.js)?
+- **Fullstack framework** jako Next.js kombinuje frontend (React) a backend (serverové routy, SSR, SSG, API).
+- Next.js umožňuje **server-side rendering (SSR)**, **static site generation (SSG)**, API endpoints atd.
+
+### Výhody Next.js (Fullstack):
+- **SEO:** Serverem generované (nebo staticky generované) stránky jsou snadno indexovatelné vyhledávači.
+- **Rychlé načtení první stránky:** První obsah je vygenerován už na serveru.
+- **Možnost backendových funkcí:** API routy, serverová logika, autentizace.
+- **Flexibilita: SSR, SSG, ISR, CSR** – lze kombinovat různé strategie generování obsahu.
+- **Lepší bezpečnost:** Citlivá logika zůstává na serveru.
+
+### Nevýhody Next.js:
+- **Složitější architektura:** Nutnost řešit jak serverovou, tak klientskou část.
+- **Nasazování:** Vyžaduje hosting, který umí běžet Node.js server (nebo edge functions).
+- **Občas vyšší komplexita vývoje** u malých projektů.
+
+---
+
+## 3. Ilustrační obrázky rozdělení
+
+### SPA (React)
+
+```mermaid
+flowchart LR
+    Browser --"Stáhne vše (JS, HTML, CSS)"--> ReactApp
+    ReactApp --"API dotazy"--> Backend
+```
+
+- Frontend (React app) běží celý v prohlížeči, komunikuje pouze s API.
+
+---
+
+### Fullstack (Next.js)
+
+```mermaid
+flowchart LR
+    Browser --"Požadavek na stránku"--> NextServer
+    NextServer --"Vyrenderuje HTML (SSR/SSG/ISR)"--> Browser
+    NextServer --"API dotazy"--> Backend
+```
+
+- Požadavek jde na server, který může stránku před-renderovat, případně poskytuje vlastní API.
+
+---
+
+## 4. Shrnutí hlavních rozdílů
+
+| Vlastnost         | SPA (React)             | Fullstack (Next.js)          |
+|-------------------|-------------------------|------------------------------|
+| SEO               | Slabší                  | Výborné                      |
+| První načtení     | Pomalejší               | Rychlejší                    |
+| Navigace          | Okamžitá                | Okamžitá                     |
+| Backend           | Potřebuješ zvlášť       | Součástí frameworku          |
+| Nasazení          | Jednoduché (static host)| Složitější (server/edge)     |
+| Komplexita        | Nižší                   | Vyšší                        |
+
+---
+
+Pokud chceš detailnější příklady nebo máš konkrétní dotaz, dej vědět!
