@@ -186,3 +186,76 @@ flowchart LR
 ---
 
 Pokud chceš detailnější příklady nebo máš konkrétní dotaz, dej vědět!
+
+# Klientská vs. serverová strana (client-side vs. server-side)
+
+## 1. Klientská strana (Client-side)
+- Kód běží v prohlížeči uživatele (JavaScript, HTML, CSS).
+- Uživatelská interakce, dynamické změny na stránce, validace formulářů apod.
+- Data se často stahují z API a zpracovávají až v prohlížeči.
+- Příklad: SPA v Reactu, kde server posílá pouze základní HTML a JS.
+
+### Výhody:
+- Rychlé reakce na uživatelské akce (bez nutnosti komunikace se serverem).
+- Nižší zatížení serveru.
+- Bohaté, interaktivní UI.
+
+### Nevýhody:
+- Horší SEO (vyhledávač nemusí vidět obsah).
+- Delší čas načtení první stránky (musí se stáhnout JS aplikace).
+- Citlivý kód je vystaven uživateli.
+
+---
+
+## 2. Serverová strana (Server-side)
+- Kód běží na serveru (např. Node.js, PHP, Python).
+- Server vygeneruje kompletní HTML pro každou stránku a pošle ho klientovi.
+- Příklad: SSR v Next.js nebo klasické PHP stránky.
+
+### Výhody:
+- Výborné SEO (vyhledávač vidí hotový obsah).
+- Rychlé načtení první stránky.
+- Možnost schovat citlivou logiku na serveru.
+
+### Nevýhody:
+- Vyšší zatížení serveru.
+- Pomalejší reakce na některé uživatelské akce (nutnost komunikace se serverem).
+- Méně interaktivní UI (pokud se vše řeší serverem).
+
+---
+
+## 3. Infografika
+
+### Porovnání datového toku
+
+#### Client-side rendering (CSR)
+```mermaid
+flowchart LR
+    User["Uživatelův prohlížeč"] -- "Stáhne HTML/JS/CSS" --> Server
+    User -- "API dotazy" --> API["Backend/API"]
+    User -- "Renderuje UI" --> User
+```
+
+#### Server-side rendering (SSR)
+```mermaid
+flowchart LR
+    User["Uživatelův prohlížeč"] -- "Požadavek na stránku" --> Server
+    Server -- "Načte data z API/DB" --> API["Backend/API"]
+    Server -- "Hotové HTML" --> User
+```
+
+---
+
+## 4. Shrnutí hlavních rozdílů
+
+| Vlastnost        | Klientská strana (CSR)  | Serverová strana (SSR)    |
+|------------------|-------------------------|---------------------------|
+| Kde běží kód     | V prohlížeči uživatele  | Na serveru                |
+| První načtení    | Pomalejší               | Rychlejší                 |
+| SEO              | Slabší                  | Výborné                   |
+| Interaktivita    | Výborná                 | Omezená                   |
+| Zatížení serveru | Nízké                   | Vyšší                     |
+
+---
+
+Pokud chceš konkrétní příklad v Reactu nebo Next.js, dej vědět!
