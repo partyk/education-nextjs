@@ -259,3 +259,77 @@ flowchart LR
 ---
 
 Pokud chceš konkrétní příklad v Reactu nebo Next.js, dej vědět!
+
+# Rozdíly mezi prostředím Prohlížeč vs. Node.js
+*v kontextu JavaScriptu, Reactu a Next.js*
+
+---
+
+## Prohlížeč (Browser)
+- **Kde běží:** Uživatelův prohlížeč (Chrome, Firefox, Edge…)
+- **Použití:** Frontend – vykreslování UI, interakce s uživatelem
+- **API:** Má přístup k webovým API (např. `window`, `document`, `localStorage`, `fetch`)
+- **DOM:** Může měnit DOM a vykreslovat komponenty Reactu
+- **Bezpečnost:** Omezený přístup kvůli bezpečnosti (sandbox)
+- **React:**
+    - React komponenty se vykreslují do DOMu (`ReactDOM.render`)
+    - V čistém Reactu (např. Create React App) vše běží pouze v prohlížeči – tzv. **Client-side rendering (CSR)**
+- **Next.js:**
+    - Next.js může také renderovat komponenty až v prohlížeči (**hydratuje** již připravený HTML)
+
+---
+
+## Node.js (Server)
+- **Kde běží:** Server, backend, lokální CLI
+- **Použití:** Zpracování požadavků, práce se soubory, API, serverová logika
+- **API:** Má přístup k souborovému systému (`fs`), síti (`http`), procesům (`process`), ale **nemá** přístup k DOM, `window` ani `document`
+- **DOM:** Neexistuje; nelze měnit stránku, pouze připravovat data/HTML
+- **React:**
+    - V Node.js lze React komponenty vykreslit do HTML na serveru (SSR) pomocí `ReactDOMServer.renderToString`
+- **Next.js:**
+    - Next.js používá Node.js ke **generování HTML na serveru** (SSR, SSG, ISR)
+    - Serverová část Next.js může obsahovat API routy, přístup k databázi apod.
+
+---
+
+## Praktické rozdíly v React a Next.js
+
+| Prostředí      | Má DOM / webová API | Přístup k serveru | Typický use-case         | Příklad kódu           |
+|----------------|---------------------|-------------------|--------------------------|------------------------|
+| Prohlížeč      | Ano                 | Ne                | UI, interakce            | `useEffect`, `fetch`   |
+| Node.js        | Ne                  | Ano               | SSR, API, generování dat | `getServerSideProps`, `fs.readFile` |
+
+---
+
+## Infografika
+
+### Next.js (Server i klient)
+
+```
++---------------------------+
+|         Uživatel          |
+|  +---------------------+  |
+|  |  Prohlížeč (React)  |  |   ←  HTML, JS, CSS z Next.js
+|  +---------------------+  |
++---------------------------+
+            ↑
+            | HTTP(S)
+            ↓
++---------------------------+
+|       Server (Node.js)    | ← SSR, SSG, API, DB
+|   - React (renderToString)|
+|   - Next.js API routes    |
+|   - Práce se soubory      |
++---------------------------+
+```
+
+---
+
+## Shrnutí
+
+- **Prohlížeč:** Spouští UI, React běží proti DOMu (CSR/Hydratace), omezený přístup (žádný filesystem, žádný přímý přístup k serveru).
+- **Node.js:** Spouští serverovou logiku, generuje HTML (SSR/SSG v Next.js), má přístup k souborům, DB, může zpracovávat API požadavky, ale **nemá DOM**.
+
+---
+
+*Chceš-li příklad rozdílu v kódu (např. fetchování dat na serveru vs. v prohlížeči), dej vědět!*
